@@ -15,6 +15,19 @@ public class Cliente {
     private String documento;
     private String nombre;
     private String apellido;
+    private TipoCliente tipocliente;
+
+    public TipoCliente getTipocliente() {
+        return tipocliente;
+    }
+
+    public void setTipocliente(TipoCliente tipocliente) {
+        this.tipocliente = tipocliente;
+    }
+ 
+    
+    
+    
 
     public String getCuil() {
         return documento;
