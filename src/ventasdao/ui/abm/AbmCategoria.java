@@ -77,11 +77,6 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
                 jbAltaCategoriaMouseClicked(evt);
             }
         });
-        jbAltaCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAltaCategoriaActionPerformed(evt);
-            }
-        });
 
         jtListadoCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,12 +136,6 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbAltaCategoriaActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_jbAltaCategoriaActionPerformed
-      
-        
-        
-    }//GEN-LAST:event_jbAltaCategoriaActionPerformed
 
     private void jbAltaCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAltaCategoriaMouseClicked
         // TODO add your handling code here:

@@ -6,10 +6,10 @@
 package ventasdao.ui;
 
 import ventasdao.ui.abm.AbmCategoria;
-import ventasdao.ui.abm.AbmCliente;
+import ventasdao.ui.abm.Abmcliente;
 
 /**
- *
+ 
  * @author Hugo Chanampe
  */
 public class Principal extends javax.swing.JFrame {
@@ -99,7 +99,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        AbmCliente abmCliente = new AbmCliente();
+        Abmcliente abmCliente = new Abmcliente();
         jdpContenedorPrincipal.add(abmCliente);
         abmCliente.setVisible(true);
         
