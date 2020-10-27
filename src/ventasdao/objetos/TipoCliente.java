@@ -15,12 +15,7 @@ public class TipoCliente {
     private String descripcion;
     
     
-    
-
-    public TipoCliente(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
+  
 
     public TipoCliente() {
     }
