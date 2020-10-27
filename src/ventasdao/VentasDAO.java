@@ -24,7 +24,7 @@ public class VentasDAO {
 
         Categoria categoria = new Categoria ();
         categoria.setDenominacion ( "golosinas" );
-        categoria.setDescripcion ( "abcdasd" );
+        categoria.setDescripcion ( "chupetines" );
 
         categoriaControlador.crear ( categoria );
 

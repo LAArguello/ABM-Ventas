@@ -14,6 +14,17 @@ public class Categoria {
    private String denominacion;
    private String descripcion;
 
+    public Categoria() {
+    }
+   
+
+    public Categoria(String denominacion, String descripcion) {
+        this.denominacion = denominacion;
+        this.descripcion = descripcion;
+    }
+   
+   
+
     public String getDenominacion() {
         return denominacion;
     }

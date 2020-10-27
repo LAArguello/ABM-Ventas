@@ -50,7 +50,7 @@ public class ClienteControlador implements ICrud<Cliente>{
             ps.setString(1, entidad.getNombre());
             ps.setString(2, entidad.getDocumento());
             ps.setString(3, entidad.getApellido ());
-            ps.setInt(4,entidad.getTipocliente().getId());
+            ps.setInt(1,entidad.getTipocliente().getId());
             ps.executeUpdate();
             connection.close();
             

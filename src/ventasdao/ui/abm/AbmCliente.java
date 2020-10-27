@@ -7,8 +7,11 @@ package ventasdao.ui.abm;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ventasdao.controladores.ClienteControlador;
 import ventasdao.objetos.Cliente;
+import ventasdao.objetos.TipoCliente;
 import ventasdao.ui.grilla.GrillaCliente;
 
 /**
@@ -21,6 +24,7 @@ public class AbmCliente extends javax.swing.JInternalFrame {
      * Creates new form AbmCliente
      */
     private Cliente cliente;
+    private TipoCliente tipocliente;
     private GrillaCliente grillaCliente;
     private ClienteControlador clienteControlador = new ClienteControlador();
     
@@ -51,34 +55,39 @@ public class AbmCliente extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()  {
+    private void initComponents() {
 
-        jtfNombre = new javax.swing.JTextField();
-        jtfCuil = new javax.swing.JTextField();
-        jtfRazonSocial = new javax.swing.JTextField();
+        jtfnombre = new javax.swing.JTextField();
+        jtfapellido = new javax.swing.JTextField();
+        jtfdocumento = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtListadoCliente = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tipo_cliente = new java.awt.Choice();
 
         setClosable(true);
 
+        jtfdocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfdocumentoActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Nombre");
 
-        jLabel2.setText("Cuil");
+        jLabel2.setText("Apellido");
 
-        jLabel3.setText("Razon Social");
+        jLabel3.setText("Documento");
 
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    jButton1ActionPerformed(evt);
-                } catch (Exception e) {
-                    e.printStackTrace ();
-                }
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -95,6 +104,8 @@ public class AbmCliente extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtListadoCliente);
 
+        jLabel5.setText("Tipo Cliente");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,16 +117,19 @@ public class AbmCliente extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfNombre)
-                            .addComponent(jtfCuil)
-                            .addComponent(jtfRazonSocial, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)))
+                            .addComponent(jtfnombre)
+                            .addComponent(jtfapellido)
+                            .addComponent(jtfdocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                            .addComponent(tipo_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
+                        .addGap(148, 148, 148)
                         .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(72, 72, 72))
         );
@@ -126,23 +140,32 @@ public class AbmCliente extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfCuil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(52, 52, 52)
-                        .addComponent(jButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(tipo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
+
+        tipo_cliente.add("Consumidor Final");
+        tipo_cliente.add("Responsable Inscripto");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -150,9 +173,20 @@ public class AbmCliente extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws Exception  {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         cliente = new Cliente();
-        cliente.setCuil(jtfCuil.getText());
-        cliente.setNombre(jtfNombre.getText());
-        cliente.setApellido(jtfRazonSocial.getText());
+        cliente.setDocumento(jtfapellido.getText());
+        cliente.setNombre(jtfnombre.getText());
+        cliente.setApellido(jtfdocumento.getText());
+       
+        tipocliente.setNombre(tipo_cliente.getItem(tipo_cliente.getSelectedIndex()));
+        if (tipocliente.getNombre()=="Consumidor Final") {
+            tipocliente.setId(1);
+            tipocliente.setDescripcion("se define como la persona que realmente utiliza un producto");
+        }
+        else {
+        tipocliente.setId(2);
+        tipocliente.setDescripcion("Responsable Inscripto está ligada a la del trabajador autónomo o empleador");
+        }
+        cliente.setTipocliente(tipocliente);
 
         try {
             clienteControlador.crear(cliente);
@@ -164,16 +198,23 @@ public class AbmCliente extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jtfdocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfdocumentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfdocumentoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtListadoCliente;
-    private javax.swing.JTextField jtfCuil;
-    private javax.swing.JTextField jtfNombre;
-    private javax.swing.JTextField jtfRazonSocial;
+    private javax.swing.JTextField jtfapellido;
+    private javax.swing.JTextField jtfdocumento;
+    private javax.swing.JTextField jtfnombre;
+    private java.awt.Choice tipo_cliente;
     // End of variables declaration//GEN-END:variables
 }

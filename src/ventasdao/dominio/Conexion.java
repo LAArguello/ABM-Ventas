@@ -59,7 +59,12 @@ public class Conexion {
          conn.close();
       }
    }
-
+   public static Properties  getProperties() throws Exception {
+      FileReader reader=new FileReader(".env");
+      Properties p = new Properties();
+      p.load(reader);
+      return p;
+   }
    
  
    

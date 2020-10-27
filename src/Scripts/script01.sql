@@ -7,9 +7,6 @@ CREATE TABLE public.clientes
     documento character varying(60) COLLATE pg_catalog."default",
     cliente_tipo_id serial NOT NULL,
     CONSTRAINT pk_clientes_id PRIMARY KEY (id)
+    CONSTRAINT tipo_cliente_id FOREIGN KEY (cliente_tipo_id)
+    REFERENCES public.cliente_tipo (id) MATCH SIMPLE
 )
-private Integer id;
-    private String documento;
-    private String nombre;
-    private String apellido;
-    private TipoCliente tipocliente
