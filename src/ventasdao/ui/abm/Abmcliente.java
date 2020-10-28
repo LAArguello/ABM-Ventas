@@ -87,9 +87,9 @@ public class Abmcliente extends javax.swing.JInternalFrame {
 
         jButton1.setText("Ingresar");
         jButton1.setToolTipText("");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -164,24 +164,25 @@ public class Abmcliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        cliente = new Cliente();
+          cliente = new Cliente();
+          tipcli= new TipoCliente();
         cliente.setDocumento(Jtextdocumento.getText());
         cliente.setNombre(Jtextnombre.getText());
         cliente.setApellido(Jtextapellido.getText()); 
         String tipoc = tipo_cliente.getItem(tipo_cliente.getSelectedIndex());  
 
-       if (tipoc=="Consumidor Final"){
+       if ("Consumidor Final".equals(tipoc)){
           tipcli.setNombre(tipoc);
           tipcli.setId(1);
-          tipcli.setDescripcion("Ejemplo");
+          tipcli.setDescripcion("se define como la persona que realmente utiliza un producto");
           
         }
-        else if(tipoc=="Responsable Inscripto"){
+        else if("Responsable Inscripto".equals(tipoc)){
             tipcli.setNombre(tipoc);
             tipcli.setId(2);
-            tipcli.setDescripcion("Ejemplo");
+            tipcli.setDescripcion("aquel contribuyente que tiene la obligación de presentar y pagar IVA");
         }
         cliente.setTipocliente(tipcli); 
         
@@ -197,7 +198,7 @@ public class Abmcliente extends javax.swing.JInternalFrame {
          } catch (Exception ex) {
              Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
          }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
