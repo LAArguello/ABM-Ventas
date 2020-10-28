@@ -28,7 +28,7 @@ _Para que funcione este abm se necesita de postgreSQL Y PGADMIN4._
 
 _Lenguaje: JAVA_
 
-## Estructura y funcionalidad 🚀
+### Estructura y funcionalidad 🚀
 
 _Este CRUD tiene una estructura formada por tres modulos:_
 
@@ -56,7 +56,7 @@ _En este modulo sirve para agregar nueva categorias de productos a la base de da
 
 _*Descripcion_ 
 
-_-*Denominacion-_
+_*Denominacion_
 
 ## Autores ✒️
 _Arguello Leonel Alejandro_ 
