@@ -32,11 +32,13 @@ _Lenguaje: JAVA_
 
 _Este CRUD tiene una estructura formada por tres modulos:_
 
-_-Principal.java: _ 
+_-Principal.java:_ 
+
 
 _En este modulo la unica funcion que tiene es de elegir uno de los otros dos modulos (Abmcliente.java o AbmCategoria.java)._ 
 
-_ -Abmcliente.java: _
+_-Abmcliente.java:_ 
+
 
 _En este modulo la funcion que este mismo tiene es agregar un nuevo cliente a la base de datos con los siguientes atributos:_ 
 
@@ -52,7 +54,7 @@ _-AbmCategoria.java:_
 
 _En este modulo sirve para agregar nueva categorias de productos a la base de datos con los siguientes atributos:_  
 
-_*Descripcion _
+_*Descripcion_ 
 
 _-*Denominacion-_
 
