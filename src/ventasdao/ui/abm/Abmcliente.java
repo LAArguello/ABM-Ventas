@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ventasdao.controladores.ClienteControlador;
+import ventasdao.objetos.Categoria;
 import ventasdao.objetos.Cliente;
 import ventasdao.objetos.TipoCliente;
 import ventasdao.ui.grilla.GrillaCliente;
+import ventasdao.controladores.TipoClienteControlador;
 /**
  *
  * @author Hugo Chanampe
@@ -25,6 +27,8 @@ public class Abmcliente extends javax.swing.JInternalFrame {
    private TipoCliente tipcli;
     private GrillaCliente grillaCliente;
     private ClienteControlador clienteControlador = new ClienteControlador();
+    private TipoClienteControlador tipoclienteControlador= new TipoClienteControlador();
+   
     
    
     public Abmcliente() {
@@ -39,7 +43,19 @@ public class Abmcliente extends javax.swing.JInternalFrame {
         } 
         jtListadoCliente.setModel(grillaCliente);
         
+        
+        
+        ArrayList<TipoCliente> tiposCliente;
+        
+         try {
+             tiposCliente= tipoclienteControlador.listar();
+         } catch (Exception ex) {
+             Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
     }
+        
+    
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,21 +76,29 @@ public class Abmcliente extends javax.swing.JInternalFrame {
         Jtextapellido = new javax.swing.JTextField();
         Jtextdocumento = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        tipo_cliente = new java.awt.Choice();
+        jtextid = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        listtipocliente = new java.awt.List();
 
         setClosable(true);
 
         jtListadoCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4","Title 5"
             }
         ));
+        jtListadoCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtListadoClienteMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtListadoCliente);
 
         nombre.setText("Apellido");
@@ -85,7 +109,7 @@ public class Abmcliente extends javax.swing.JInternalFrame {
 
         nombre3.setText("Tipo Cliente");
 
-        jButton1.setText("Ingresar");
+        jButton1.setText("Modificar");
         jButton1.setToolTipText("");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,29 +117,53 @@ public class Abmcliente extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setText("Ingresar");
+        jButton2.setToolTipText("");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Eliminar");
+        jButton3.setToolTipText("");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Jtextnombre)
-                            .addComponent(Jtextapellido, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                            .addComponent(Jtextdocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                            .addComponent(tipo_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(nombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton2)))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(Jtextnombre)
+                                .addComponent(Jtextapellido, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                                .addComponent(Jtextdocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                                .addComponent(jtextid))
+                            .addComponent(listtipocliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -126,12 +174,14 @@ public class Abmcliente extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
+                        .addGap(39, 39, 39)
+                        .addComponent(jtextid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Jtextnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,10 +195,13 @@ public class Abmcliente extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tipo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                            .addComponent(listtipocliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton3)
+                    .addComponent(jButton2))
+                .addContainerGap(93, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(77, 77, 77)
@@ -158,22 +211,21 @@ public class Abmcliente extends javax.swing.JInternalFrame {
 
         nombre.getAccessibleContext().setAccessibleName("nombre");
         nombre.getAccessibleContext().setAccessibleDescription("");
-        tipo_cliente.add("Consumidor Final");
-        tipo_cliente.add("Responsable Inscripto");
+        listtipocliente.add("Consumidor Final");
+        listtipocliente.add("Responsable Inscripto");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
           cliente = new Cliente();
           tipcli= new TipoCliente();
         cliente.setDocumento(Jtextdocumento.getText());
         cliente.setNombre(Jtextnombre.getText());
         cliente.setApellido(Jtextapellido.getText()); 
-        String tipoc = tipo_cliente.getItem(tipo_cliente.getSelectedIndex());  
-
-       if ("Consumidor Final".equals(tipoc)){
+        String tipoc = (listtipocliente.getItem(listtipocliente.getSelectedIndex()));
+         if ("Consumidor Final".equals(tipoc)){
           tipcli.setNombre(tipoc);
           tipcli.setId(1);
           tipcli.setDescripcion("se define como la persona que realmente utiliza un producto");
@@ -182,11 +234,63 @@ public class Abmcliente extends javax.swing.JInternalFrame {
         else if("Responsable Inscripto".equals(tipoc)){
             tipcli.setNombre(tipoc);
             tipcli.setId(2);
-            tipcli.setDescripcion("aquel contribuyente que tiene la obligación de presentar y pagar IVA");
+            tipcli.setDescripcion("aquel contribuyente que tiene la obligaciÃ³n de presentar y pagar IVA");
+        }
+        cliente.setTipocliente(tipcli); 
+        cliente.setId(Integer.parseInt(jtextid.getText()));
+             
+       try {
+            clienteControlador.modificar(cliente);
+        } catch (Exception ex) {
+             Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
+         }
+
+         try {
+             jtListadoCliente.setModel(new GrillaCliente(clienteControlador.listar()));
+         } catch (Exception ex) {
+             Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
+         }
+                                      
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jtListadoClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoClienteMouseClicked
+        // TODO add your handling code here:
+         Cliente cliente = grillaCliente.getClienteFromRow(jtListadoCliente.getSelectedRow());
+         
+               Jtextapellido.setText(cliente.getApellido());
+               Jtextnombre.setText(cliente.getNombre());
+               Jtextdocumento.setText(cliente.getDocumento());
+               jtextid.setText(cliente.getId().toString() );
+               if(cliente.getTipocliente().getId()==1){
+                  listtipocliente.select(0);
+               } else if(cliente.getTipocliente().getId()==2){
+        listtipocliente.select(1);
+    }
+               
+               
+    }//GEN-LAST:event_jtListadoClienteMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+          cliente = new Cliente();
+          tipcli= new TipoCliente();
+        cliente.setDocumento(Jtextdocumento.getText());
+        cliente.setNombre(Jtextnombre.getText());
+        cliente.setApellido(Jtextapellido.getText()); 
+        String tipoc = (listtipocliente.getItem(listtipocliente.getSelectedIndex()));
+         if ("Consumidor Final".equals(tipoc)){
+          tipcli.setNombre(tipoc);
+          tipcli.setId(1);
+          tipcli.setDescripcion("se define como la persona que realmente utiliza un producto");
+          
+        }
+        else if("Responsable Inscripto".equals(tipoc)){
+            tipcli.setNombre(tipoc);
+            tipcli.setId(2);
+            tipcli.setDescripcion("aquel contribuyente que tiene la obligaciÃ³n de presentar y pagar IVA");
         }
         cliente.setTipocliente(tipcli); 
         
-
        try {
             clienteControlador.crear(cliente);
         } catch (Exception ex) {
@@ -198,7 +302,24 @@ public class Abmcliente extends javax.swing.JInternalFrame {
          } catch (Exception ex) {
              Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
          }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        cliente= new Cliente();
+        cliente.setId(Integer.parseInt(jtextid.getText()));
+             
+       try {
+            clienteControlador.eliminar(cliente);
+        } catch (Exception ex) {
+             Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
+         }
+
+         try {
+             jtListadoCliente.setModel(new GrillaCliente(clienteControlador.listar()));
+         } catch (Exception ex) {
+             Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -206,12 +327,15 @@ public class Abmcliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField Jtextdocumento;
     private javax.swing.JTextField Jtextnombre;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtListadoCliente;
+    private javax.swing.JTextField jtextid;
+    private java.awt.List listtipocliente;
     private java.awt.Label nombre;
     private java.awt.Label nombre1;
     private java.awt.Label nombre2;
     private java.awt.Label nombre3;
-    private java.awt.Choice tipo_cliente;
     // End of variables declaration//GEN-END:variables
 }

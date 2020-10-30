@@ -94,8 +94,20 @@ public class CategoriaControlador implements ICrud<Categoria>{
     }
 
     @Override
-    public boolean eliminar(Categoria entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean eliminar(Categoria entidad)throws SQLException, Exception {
+connection = Conexion.obtenerConexion();
+        String sql = "DELETE FROM categorias WHERE id = ?";
+        
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, entidad.getId());
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaControlador.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -104,8 +116,20 @@ public class CategoriaControlador implements ICrud<Categoria>{
     }
 
     @Override
-    public boolean modificar(Categoria entidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-}
+    public boolean modificar(Categoria entidad) throws SQLException, Exception {
+        //To change body of generated methods, choose Tools | Templates.
+        connection = Conexion.obtenerConexion();
+        this.sql="UPDATE categorias SET denominacion=?, descripcion=? WHERE id=?";
+          try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, entidad.getDenominacion());
+            ps.setString(2, entidad.getDescripcion());
+            ps.setInt(3, entidad.getId());
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+           
+    }}

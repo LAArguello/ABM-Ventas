@@ -22,30 +22,42 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="nombre" min="-2" max="-2" attributes="0"/>
                           <Component id="nombre2" min="-2" max="-2" attributes="0"/>
                           <Component id="nombre3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="Jtextnombre" max="32767" attributes="0"/>
-                          <Component id="Jtextapellido" pref="59" max="32767" attributes="0"/>
-                          <Component id="Jtextdocumento" pref="59" max="32767" attributes="0"/>
-                          <Component id="tipo_cliente" alignment="0" max="32767" attributes="0"/>
-                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="176" max="32767" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="323" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="Jtextnombre" max="32767" attributes="0"/>
+                              <Component id="Jtextapellido" pref="59" max="32767" attributes="0"/>
+                              <Component id="Jtextdocumento" pref="59" max="32767" attributes="0"/>
+                              <Component id="jtextid" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="listtipocliente" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="122" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="377" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -60,13 +72,15 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="232" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="jtextid" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="Jtextnombre" min="-2" max="-2" attributes="0"/>
@@ -83,13 +97,17 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="nombre3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tipo_cliente" min="-2" max="-2" attributes="0"/>
+                          <Component id="listtipocliente" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="66" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="95" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="93" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
@@ -111,15 +129,13 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="jtListadoCliente">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
-              </Table>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;        {null, null, null, null, null},&#xa;        {null, null, null, null, null},&#xa;        {null, null, null, null, null},&#xa;        {null, null, null, null, null}&#xa;    },&#xa;    new String [] {&#xa;        &quot;Title 1&quot;, &quot;Title 2&quot;, &quot;Title 3&quot;, &quot;Title 4&quot;,&quot;Title 5&quot;&#xa;    }&#xa;)" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtListadoClienteMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -155,16 +171,36 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ingresar"/>
+        <Property name="text" type="java.lang.String" value="Modificar"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="java.awt.Choice" name="tipo_cliente">
+    <Component class="javax.swing.JTextField" name="jtextid">
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingresar"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eliminar"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="java.awt.List" name="listtipocliente">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tipo_cliente.add(&quot;Consumidor Final&quot;);&#xa;tipo_cliente.add(&quot;Responsable Inscripto&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="listtipocliente.add(&quot;Consumidor Final&quot;);&#xa;listtipocliente.add(&quot;Responsable Inscripto&quot;);"/>
       </AuxValues>
     </Component>
   </SubComponents>
