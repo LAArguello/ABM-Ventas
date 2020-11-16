@@ -1,6 +1,6 @@
 # CRUD DE VENTA
 
-Proyecto que contiene el Alta de Categoria y Clientes con JDBC
+Proyecto que contiene el Alta, baja y modificaciones de Categoria y Clientes con JDBC
 
 
 ### Instalacion 🔩
@@ -40,7 +40,7 @@ _En este modulo la unica funcion que tiene es de elegir uno de los otros dos mod
 _-Abmcliente.java:_ 
 
 
-_En este modulo la funcion que este mismo tiene es agregar un nuevo cliente a la base de datos con los siguientes atributos:_ 
+_En este modulo la funcion que este mismo tiene es agregar,borrar o editar un cliente a la base de datos con los siguientes atributos:_ 
 
 _*Nombre_ 
 
@@ -52,7 +52,7 @@ _*Tipo de Cliente (el cual solo agrega un id en forma de clave foranea a la tabl
 
 _-AbmCategoria.java:_ 
 
-_En este modulo sirve para agregar nueva categorias de productos a la base de datos con los siguientes atributos:_  
+_En este modulo sirve para agregar, editar, o borrar categorias de productos a la base de datos con los siguientes atributos:_  
 
 _*Descripcion_ 
 
