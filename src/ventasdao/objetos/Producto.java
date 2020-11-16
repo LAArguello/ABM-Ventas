@@ -1,7 +1,9 @@
 package ventasdao.objetos;
 
-public class Producto {
+import java.util.Date;
 
+public class Producto {
+    private Integer id;
     private Categoria categoria;
 
     private String nombre;
@@ -9,6 +11,24 @@ public class Producto {
     private String descripcion;
 
     private Float precio;
+    
+    private Date fecha_alta;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getFecha_alta() {
+        return fecha_alta;
+    }
+
+    public void setFecha_alta(Date fecha_alta) {
+        this.fecha_alta = fecha_alta;
+    }
 
     public Categoria getCategoria() {
         return categoria;

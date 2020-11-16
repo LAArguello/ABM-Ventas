@@ -5,8 +5,11 @@
  */
 package ventasdao.ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ventasdao.ui.abm.AbmCategoria;
 import ventasdao.ui.abm.Abmcliente;
+import ventasdao.ui.abm.AbmProducto2;
 
 /**
  
@@ -35,6 +38,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jmiCategoria = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jmproducto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +70,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jmproducto.setText("Producto");
+        jmproducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmproductoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmproducto);
 
         jMenuBar1.add(jMenu1);
 
@@ -105,6 +117,19 @@ public class Principal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jmproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmproductoActionPerformed
+        try {
+            AbmProducto2 abmProducto;
+            abmProducto = new AbmProducto2();
+            jdpContenedorPrincipal.add(abmProducto);
+            abmProducto.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+ 
+    }//GEN-LAST:event_jmproductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,5 +172,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JDesktopPane jdpContenedorPrincipal;
     private javax.swing.JMenuItem jmiCategoria;
+    private javax.swing.JMenuItem jmproducto;
     // End of variables declaration//GEN-END:variables
 }
