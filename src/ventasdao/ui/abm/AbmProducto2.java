@@ -232,12 +232,11 @@ private ControladorProducto productoControlador;
         }
         
     try {
-        jtListadoProducto.setModel(new GrillaProducto(productoControlador.listar()));
-    } catch (SQLException ex) {
-        Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (Exception ex) {
+            grillaProducto = new GrillaProducto(productoControlador.listar());
+            jtListadoProducto.setModel(grillaProducto);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
         Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
     }
         
