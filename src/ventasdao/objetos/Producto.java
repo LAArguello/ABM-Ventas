@@ -14,6 +14,10 @@ public class Producto {
     
     private Date fecha_alta;
 
+    public Producto() {
+    }
+
+    
     public Integer getId() {
         return id;
     }

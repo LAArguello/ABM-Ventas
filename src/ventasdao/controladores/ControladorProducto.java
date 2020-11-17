@@ -58,8 +58,19 @@ public class ControladorProducto implements ICrud<Producto> {
     }
 
     @Override
-    public boolean eliminar(Producto entidad) {
-        return false;
+    public boolean eliminar(Producto entidad) throws SQLException, ClassNotFoundException {
+        connection = Conexion.obtenerConexion();
+        String sql = "DELETE FROM productos WHERE id = ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, entidad.getId());
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -68,9 +79,27 @@ public class ControladorProducto implements ICrud<Producto> {
     }
 
     @Override
-    public boolean modificar(Producto entidad) {
+    public boolean modificar(Producto entidad) throws SQLException, ClassNotFoundException, Exception {
+          connection = Conexion.obtenerConexion();
+                  Date fecha= new Date (entidad.getFecha_alta().getTime());
+
+        this.sql= "UPDATE productos SET nombre=?, descripcion=?, precio=?, fecha_alta=?, categoria_id=? WHERE id=?";
+          try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, entidad.getNombre());
+            ps.setString(2, entidad.getDescripcion() );
+            ps.setFloat(3,entidad.getPrecio() );
+            ps.setDate(4,fecha);
+            ps.setInt(5, entidad.getCategoria().getId());
+            ps.setInt(6,entidad.getId());
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } 
         return false;
     }
+    
 
     @Override
     public ArrayList <Producto> listar() throws SQLException, ClassNotFoundException, Exception {

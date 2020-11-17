@@ -53,8 +53,7 @@ public class Categoria {
     public String toString() {
         return denominacion; //To change body of generated methods, choose Tools | Templates.
     }
-   
-   
-   
+
+ 
     
 }
