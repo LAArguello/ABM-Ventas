@@ -5,6 +5,7 @@
  */
 package ventasdao.ui.abm;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,7 +46,7 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
     
     jtfDenominacion.setText("");
     jtfDescripcion.setText("");
-    
+    jtfid.setText("");
     }
 
     /**
@@ -182,17 +183,20 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         
         try {
             categoriaControlador.crear(categoria);
+            limpiarCampos();
         } catch (Exception ex) {
             Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+        ArrayList<Categoria> categorias = new ArrayList<>();
+
         try {
-            jtListadoCategorias.setModel(new GrillaCategoria(categoriaControlador.listar()));
-        } catch (Exception ex) {
-            Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
+            categorias = categoriaControlador.listar();
+        } catch (Exception e) {
+            e.printStackTrace ();
         }
-        
+
+         grillaCategoria = new GrillaCategoria(categorias);
+        jtListadoCategorias.setModel(grillaCategoria);
         
     }//GEN-LAST:event_jbAltaCategoriaMouseClicked
 
@@ -218,11 +222,13 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         
         try {
             categoriaControlador.modificar(categoria);
+            limpiarCampos();
         } catch (Exception ex) {
             Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             jtListadoCategorias.setModel(new GrillaCategoria(categoriaControlador.listar()));
+
         } catch (Exception ex) {
             Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -238,15 +244,18 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         
        try {
             categoriaControlador.eliminar(categoria);
+            limpiarCampos();
         } catch (Exception ex) {
             Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             jtListadoCategorias.setModel(new GrillaCategoria(categoriaControlador.listar()));
+
         } catch (Exception ex) {
             Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);    }//GEN-LAST:event_jbAltaCategoria2MouseClicked
 
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

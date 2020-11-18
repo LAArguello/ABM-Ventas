@@ -297,11 +297,15 @@ public class Abmcliente extends javax.swing.JInternalFrame {
              Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
          }
 
-         try {
-             jtListadoCliente.setModel(new GrillaCliente(clienteControlador.listar()));
-         } catch (Exception ex) {
-             Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        ArrayList<Cliente> clientes;
+        try {
+            clientes = clienteControlador.listar();
+            grillaCliente = new GrillaCliente(clientes);
+        } catch (Exception e) {
+            e.printStackTrace ();
+        } 
+        jtListadoCliente.setModel(grillaCliente);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
