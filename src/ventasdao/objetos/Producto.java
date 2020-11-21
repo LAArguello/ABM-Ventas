@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Producto {
     private Integer id;
+    
     private Categoria categoria;
 
     private String nombre;
@@ -65,9 +66,10 @@ public class Producto {
     public void setPrecio(Float precio) {
         this.precio = precio;
     }
+
     @Override
     public String toString() {
         return nombre; //To change body of generated methods, choose Tools | Templates.
-     
-}
+    }
+   
 }

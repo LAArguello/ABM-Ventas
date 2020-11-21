@@ -48,14 +48,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
-             try {
-            ArrayList<Producto> producto = productoControlador.listar();
-                    modelcombo2= new DefaultComboBoxModel(producto.toArray());
-                    CB_Producto.setModel(modelcombo2);
-           
-        } catch (Exception ex) {
-            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
         try {
             ArrayList<Cliente> clientes = clienteControlador.listar();
                     modelcombo= new DefaultComboBoxModel(clientes.toArray());
@@ -64,7 +57,16 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+             try {
+            ArrayList<Producto> productos = productoControlador.listar();
+                    modelcombo2= new DefaultComboBoxModel(productos.toArray());
+                    CB_Producto.setModel(modelcombo2);
+                    
+
+        } catch (Exception ex) {
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
          
     }
             /**

@@ -132,6 +132,7 @@ connection = Conexion.obtenerConexion();
             return categoria;
     }
     
+    
 
     @Override
     public boolean modificar(Categoria entidad) throws SQLException, Exception {
