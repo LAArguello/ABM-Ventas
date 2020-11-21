@@ -12,7 +12,7 @@ import ventasdao.objetos.Cliente;
 
 /**
  *
- * @author Hugo Chanampe
+ * @author Arguello Leonel
  */
 public class GrillaCliente extends AbstractTableModel{
     

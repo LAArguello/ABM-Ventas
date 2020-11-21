@@ -16,7 +16,7 @@ import ventasdao.ui.grilla.GrillaCliente;
 import ventasdao.controladores.TipoClienteControlador;
 /**
  *
- * @author Hugo Chanampe
+ * @author Arguello Leonel
  */
 public class Abmcliente extends javax.swing.JInternalFrame {
 

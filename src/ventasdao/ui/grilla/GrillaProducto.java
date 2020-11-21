@@ -11,7 +11,7 @@ import ventasdao.objetos.Producto;
 
 /**
  *
- * @author Administrador
+ * @author Arguello Leonel
  */
 public class GrillaProducto extends AbstractTableModel{
         private ArrayList<Producto> productos = new ArrayList<>();

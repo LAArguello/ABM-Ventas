@@ -60,5 +60,9 @@ public class Cliente {
         this.nombre = nombre;
     }
 
- 
+@Override
+    public String toString() {
+        return nombre + " "+ apellido; //To change body of generated methods, choose Tools | Templates.
+     
+}
 }

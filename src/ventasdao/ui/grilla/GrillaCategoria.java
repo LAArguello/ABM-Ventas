@@ -11,7 +11,7 @@ import ventasdao.objetos.Categoria;
 
 /**
  *
- * @author Hugo Chanampe
+ * @author Arguello Leonel
  */
 public class GrillaCategoria extends AbstractTableModel{
     

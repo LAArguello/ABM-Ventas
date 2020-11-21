@@ -73,10 +73,7 @@ public class ControladorProducto implements ICrud<Producto> {
         return true;
     }
 
-    @Override
-    public Producto extraer(int id) {
-        return null;
-    }
+    
 
     @Override
     public boolean modificar(Producto entidad) throws SQLException, ClassNotFoundException, Exception {
@@ -102,8 +99,8 @@ public class ControladorProducto implements ICrud<Producto> {
     
 
     @Override
-    public ArrayList <Producto> listar() throws SQLException, ClassNotFoundException, Exception {
-        connection = Conexion.obtenerConexion ();
+       public ArrayList<Producto> listar() throws SQLException,Exception{       
+      connection = Conexion.obtenerConexion ();
         try{
             
             this.stmt = connection.createStatement();
@@ -115,22 +112,21 @@ public class ControladorProducto implements ICrud<Producto> {
             
             while(rs.next()){
                 Producto producto= new Producto();
-                
-                
                 producto.setId(rs.getInt("id"));
                 producto.setNombre(rs.getString("nombre"));
                 producto.setDescripcion(rs.getString("descripcion"));
                 producto.setPrecio(rs.getFloat("precio"));
                 producto.setFecha_alta(rs.getDate("fecha_alta"));
                 producto.setCategoria(getCategoria(rs.getInt("categoria_id")));
-              
                 productos.add(producto);
                 
             }
             return productos;
         } catch(SQLException ex){
+            ex.printStackTrace();
         }
         return null;
+    
     }
     
     private Categoria getCategoria(Integer id) throws Exception{
@@ -138,6 +134,32 @@ public class ControladorProducto implements ICrud<Producto> {
      Categoria categoria = categoriaControlador.extraer(id);
      return categoria;
  }   
+    
+    
+    @Override
+    public Producto extraer(int id) throws SQLException, Exception {
+            connection = Conexion.obtenerConexion();
+            sql = "SELECT * FROM productos WHERE id = ?";
+            ps = connection.prepareStatement(sql);
+            
+            ps.setInt(1, id);
+            
+            
+            this.rs   = ps.executeQuery();
+            
+            connection.close();
+            
+            this.rs.next();
+            Producto producto= new Producto();
+                producto.setId(rs.getInt("id"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecio(rs.getFloat("precio"));
+                producto.setFecha_alta(rs.getDate("fecha_alta"));
+                producto.setCategoria(getCategoria(rs.getInt("categoria_id")));
+
+            return producto;
+    }
     
 }
 

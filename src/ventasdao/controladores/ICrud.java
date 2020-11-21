@@ -9,10 +9,7 @@ package ventasdao.controladores;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- *
- * @author hugo
- */
+
 public interface ICrud<T> {
     
   public boolean crear(T entidad) throws SQLException, Exception;

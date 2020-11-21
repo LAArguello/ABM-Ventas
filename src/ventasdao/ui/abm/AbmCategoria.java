@@ -15,7 +15,7 @@ import ventasdao.ui.grilla.GrillaCategoria;
 
 /**
  *
- * @author Hugo Chanampe
+ * @author Arguello Leonel
  */
 public class AbmCategoria extends javax.swing.JInternalFrame {
 

@@ -37,9 +37,6 @@ public class ClienteControlador implements ICrud<Cliente>{
     private TipoCliente tipcli;
     
 
-    //public void modificarCategoria(Categoria c);
-    //public Categoria obtenerCategoria(Integer id);
-    //public void eliminarCategoria(Categoria c);
     
     @Override
     public boolean crear(Cliente entidad) throws SQLException, Exception{
@@ -146,8 +143,29 @@ public class ClienteControlador implements ICrud<Cliente>{
      
 
     @Override
-    public Cliente extraer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cliente extraer(int id) throws SQLException, Exception {
+     connection = Conexion.obtenerConexion();
+            sql = "SELECT * FROM clientes WHERE id = ?";
+            ps = connection.prepareStatement(sql);
+            
+            ps.setInt(1, id);
+            
+            
+            this.rs   = ps.executeQuery();
+            
+            connection.close();
+            
+            this.rs.next();
+            Cliente cliente= new Cliente();
+            cliente.setId(id);
+            cliente.setNombre(rs.getString("nombre"));
+            cliente.setApellido(rs.getString("apellido"));
+            cliente.setDocumento(rs.getString("documento"));
+            tipcli.setId(rs.getInt("cliente_tipo_id"));
+            cliente.setTipocliente(tipcli);
+            return cliente;
+            
+            
     }
 
     

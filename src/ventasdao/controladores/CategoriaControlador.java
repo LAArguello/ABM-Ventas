@@ -36,6 +36,7 @@ public class CategoriaControlador implements ICrud<Categoria>{
     
 
     
+    @Override
     public ArrayList<Categoria> listar() throws SQLException, Exception{
     
     
