@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
 import ventasdao.controladores.ClienteControlador;
 import ventasdao.controladores.ControladorFactura;
 import ventasdao.controladores.ControladorProducto;
@@ -16,6 +17,7 @@ import ventasdao.objetos.Cliente;
 import ventasdao.objetos.Factura;
 import ventasdao.objetos.Producto;
 import ventasdao.ui.grilla.GrillaFactura;
+import ventasdao.ui.grilla.GrillaProductoFactura;
 
 /**
  *
@@ -30,6 +32,10 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     private ControladorProducto productoControlador;
     private DefaultComboBoxModel modelcombo;
     private DefaultComboBoxModel modelcombo2;
+            Float preciotemporal= 0f;
+            Float cantidadtemporal=0f;
+            ArrayList<Producto> productosobtenidos;
+
 
 
 
@@ -42,10 +48,9 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         controladorFactura= new ControladorFactura();
         clienteControlador= new ClienteControlador();
         productoControlador= new ControladorProducto();
-     
              try {
             grillafactura= new GrillaFactura(controladorFactura.listar());
-            tablefacturas.setModel(grillafactura);
+            tablefacturas1.setModel(grillafactura);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -62,6 +67,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
              ArrayList<Producto> productos = productoControlador.listar();
                     modelcombo2= new DefaultComboBoxModel(productos.toArray());
                     CB_Producto.setModel(modelcombo2);
+                    
          } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -80,7 +86,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         CB_Producto = new javax.swing.JComboBox<>();
         JObservacion = new javax.swing.JTextField();
         B_Producto = new javax.swing.JButton();
-        JCantidad1 = new javax.swing.JTextField();
+        JCantidad = new javax.swing.JTextField();
         CB_Pago = new javax.swing.JComboBox<>();
         lTotal = new javax.swing.JLabel();
         lTotal1 = new javax.swing.JLabel();
@@ -90,20 +96,25 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         lTotal5 = new javax.swing.JLabel();
         lTotal6 = new javax.swing.JLabel();
         lTotal7 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablefacturas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablefacturas1 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableproductos = new javax.swing.JTable();
+        JTotal = new javax.swing.JTextField();
 
         CB_Cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         CB_Producto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        CB_Producto.addActionListener(new java.awt.event.ActionListener() {
+
+        B_Producto.setText("Añadir Producto");
+        B_Producto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CB_ProductoActionPerformed(evt);
+                B_ProductoActionPerformed(evt);
             }
         });
 
-        B_Producto.setText("Añadir Producto");
+        JCantidad.setText("1");
 
         CB_Pago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tarjeta de Credito", "Tarjeta de Debito", "Efectivo", "Mercadopago" }));
 
@@ -121,7 +132,14 @@ public class AbmFactura extends javax.swing.JInternalFrame {
 
         lTotal7.setText("Forma de pago");
 
-        tablefacturas.setModel(new javax.swing.table.DefaultTableModel(
+        jButton1.setText("Generar Factura ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        tablefacturas1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -132,19 +150,33 @@ public class AbmFactura extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tablefacturas);
+        jScrollPane2.setViewportView(tablefacturas1);
 
-        jButton1.setText("Generar Factura ");
+        tableproductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "id", "Producto", "Cantidad", "Precio"
+            }
+        ));
+        jScrollPane3.setViewportView(tableproductos);
+
+        JTotal.setText("$");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(315, 315, 315)
+                .addComponent(lTotal)
+                .addContainerGap(465, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(315, 315, 315)
-                        .addComponent(lTotal))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lTotal1)
@@ -161,21 +193,24 @@ public class AbmFactura extends javax.swing.JInternalFrame {
                             .addComponent(CB_Cliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(DateFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(JObservacion)
-                            .addComponent(JCantidad1)
-                            .addComponent(CB_Pago, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(JCantidad)
+                            .addComponent(CB_Pago, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JTotal)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
+                        .addGap(59, 59, 59)
                         .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -191,35 +226,85 @@ public class AbmFactura extends javax.swing.JInternalFrame {
                                         .addComponent(CB_Producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(lTotal3))
                                 .addGap(18, 18, 18)
-                                .addComponent(JCantidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(JCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lTotal4))
                         .addGap(12, 12, 12)
-                        .addComponent(B_Producto)
-                        .addGap(18, 18, 18)
+                        .addComponent(B_Producto))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(lTotal5)
+                                .addGap(45, 45, 45))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(JObservacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lTotal5))
-                                .addGap(18, 18, 18)
-                                .addComponent(CB_Pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lTotal7))
+                                    .addComponent(lTotal7)
+                                    .addComponent(CB_Pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
-                        .addComponent(lTotal6)
-                        .addGap(12, 12, 12)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                        .addComponent(lTotal))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lTotal6)
+                            .addComponent(JTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(lTotal)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CB_ProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_ProductoActionPerformed
+    private void B_ProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_ProductoActionPerformed
+        
+        Producto producto= new Producto();
+        producto.setNombre(CB_Producto.getSelectedItem().toString());
+        
+        Producto productoobtenido= new Producto();
+        try {
+            productoobtenido = productoControlador.objeto(producto.getNombre());
+        } catch (Exception ex) {
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Float cantidadproducto= Float.parseFloat(JCantidad.getText());
+        float precioproducto= Float.parseFloat(JCantidad.getText()) * productoobtenido.getPrecio();
+                preciotemporal= preciotemporal + precioproducto;
+                cantidadtemporal= cantidadtemporal + cantidadproducto;
+                       JTotal.setText(preciotemporal.toString());
+
+    }//GEN-LAST:event_B_ProductoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Factura factura = new Factura();
+        factura.setFecha(DateFactura.getDate());
+        factura.setId_cliente((Integer) CB_Cliente.getSelectedItem());
+        String temporal= cantidadtemporal.toString();
+        factura.setCantidad_producto(Integer.parseInt(temporal));
+        factura.setObservacion(JObservacion.getText());
+        factura.setForma_pago((String) CB_Pago.getSelectedItem());
+        factura.setTotal(Float.parseFloat(JTotal.getText()));
+        
+        try {
+            controladorFactura.crear(factura);
+             //limpiarCampos();
+        
+        } catch (Exception ex) {
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            grillafactura= new GrillaFactura(controladorFactura.listar());
+            tablefacturas1.setModel(grillafactura);
+        } catch (Exception ex) {
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         // TODO add your handling code here:
-    }//GEN-LAST:event_CB_ProductoActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -228,10 +313,12 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> CB_Pago;
     private javax.swing.JComboBox<String> CB_Producto;
     private com.toedter.calendar.JDateChooser DateFactura;
-    private javax.swing.JTextField JCantidad1;
+    private javax.swing.JTextField JCantidad;
     private javax.swing.JTextField JObservacion;
+    private javax.swing.JTextField JTotal;
     private javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lTotal;
     private javax.swing.JLabel lTotal1;
     private javax.swing.JLabel lTotal2;
@@ -240,6 +327,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lTotal5;
     private javax.swing.JLabel lTotal6;
     private javax.swing.JLabel lTotal7;
-    private javax.swing.JTable tablefacturas;
+    private javax.swing.JTable tablefacturas1;
+    private javax.swing.JTable tableproductos;
     // End of variables declaration//GEN-END:variables
 }

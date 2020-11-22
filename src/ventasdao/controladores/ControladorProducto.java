@@ -163,5 +163,30 @@ public class ControladorProducto implements ICrud<Producto> {
      return categoria;
  }   
     
+     public Producto objeto(String nombre) throws SQLException, Exception {
+          connection = Conexion.obtenerConexion();
+            sql = "SELECT * FROM productos WHERE nombre = ?";
+            ps = connection.prepareStatement(sql);
+            
+            ps.setString(1, nombre);
+            
+            
+            this.rs   = ps.executeQuery();
+            
+            connection.close();
+            
+            this.rs.next();
+            
+             Producto producto= new Producto();
+                
+                
+                producto.setId(rs.getInt("id"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecio(rs.getFloat("precio"));
+                producto.setFecha_alta(rs.getDate("fecha_alta"));
+                producto.setCategoria(getCategoria(rs.getInt("categoria_id")));
+                return producto;
+     }
 }
 

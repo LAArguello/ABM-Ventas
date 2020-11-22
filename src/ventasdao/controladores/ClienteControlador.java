@@ -105,13 +105,11 @@ public class ClienteControlador implements ICrud<Cliente>{
                 cliente.setTipocliente(tipcli);
 
                 
-                        //System.out.println(cliente);
                 
                 
                 clientes.add(cliente);
                 
             }
-            //System.out.println(cont);
             return clientes;
         } catch(SQLException ex){
             ex.printStackTrace();

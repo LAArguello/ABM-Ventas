@@ -69,7 +69,9 @@ public class Producto {
 
     @Override
     public String toString() {
-        return nombre; //To change body of generated methods, choose Tools | Templates.
+      //return nombre +" "+ ", Precio:"+" "+ precio +"$"; 
+//To change body of generated methods, choose Tools | Templates.
+return nombre;
     }
    
 }

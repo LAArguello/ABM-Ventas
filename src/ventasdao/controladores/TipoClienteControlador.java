@@ -21,7 +21,7 @@ import ventasdao.dominio.Conexion;
 import ventasdao.objetos.Cliente;
 /**
  *
- * @author hchanampe
+ * @author Arguello Leonel
  */
 public class TipoClienteControlador implements ICrud<TipoCliente>{
      private Connection connection;
@@ -93,7 +93,6 @@ public class TipoClienteControlador implements ICrud<TipoCliente>{
                 tipo_cliente.add(tipoCliente);
                 
             }
-            //System.out.println(cont);
             return tipo_cliente;
         } catch(SQLException ex){
             ex.printStackTrace();
