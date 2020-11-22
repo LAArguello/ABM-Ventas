@@ -41,6 +41,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         initComponents();
         controladorFactura= new ControladorFactura();
         clienteControlador= new ClienteControlador();
+        productoControlador= new ControladorProducto();
      
              try {
             grillafactura= new GrillaFactura(controladorFactura.listar());
@@ -57,17 +58,13 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
-             try {
-            ArrayList<Producto> productos = productoControlador.listar();
+        try {
+             ArrayList<Producto> productos = productoControlador.listar();
                     modelcombo2= new DefaultComboBoxModel(productos.toArray());
                     CB_Producto.setModel(modelcombo2);
-                    
-
-        } catch (Exception ex) {
+         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-         
     }
             /**
      * This method is called from within the constructor to initialize the form.

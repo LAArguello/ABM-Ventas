@@ -7,7 +7,7 @@ package ventasdao.objetos;
 
 /**
  *
- * @author Hugo Chanampe
+ * @author Arguello Leonel
  */
 public class Cliente {
     
