@@ -38,7 +38,7 @@ public class ControladorProducto implements ICrud<Producto> {
     @Override
     public boolean crear(Producto entidad) throws SQLException, ClassNotFoundException {
          connection = Conexion.obtenerConexion ();
-        String sql = "INSERT INTO productos (nombre,descripcion,precio,fecha_alta,categoria_id) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO productos (nombre, descripcion, precio, fecha_alta, categoria_id) VALUES (?, ?, ?, ?, ?)";
         Date fecha= new Date (entidad.getFecha_alta().getTime());
         try {
             ps = connection.prepareStatement(sql);

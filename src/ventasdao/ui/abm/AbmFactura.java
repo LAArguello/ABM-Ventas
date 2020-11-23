@@ -17,7 +17,6 @@ import ventasdao.objetos.Cliente;
 import ventasdao.objetos.Factura;
 import ventasdao.objetos.Producto;
 import ventasdao.ui.grilla.GrillaFactura;
-import ventasdao.ui.grilla.GrillaProductoFactura;
 
 /**
  *
@@ -34,7 +33,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     private DefaultComboBoxModel modelcombo2;
             Float preciotemporal= 0f;
             Float cantidadtemporal=0f;
-            ArrayList<Producto> productosobtenidos;
+            String Productos="";
 
 
 
@@ -270,6 +269,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
+       Productos= Productos + ", " + productoobtenido.getNombre();
         Float cantidadproducto= Float.parseFloat(JCantidad.getText());
         float precioproducto= Float.parseFloat(JCantidad.getText()) * productoobtenido.getPrecio();
                 preciotemporal= preciotemporal + precioproducto;
@@ -279,13 +279,15 @@ public class AbmFactura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_B_ProductoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
+        
         Factura factura = new Factura();
         factura.setFecha(DateFactura.getDate());
-        factura.setId_cliente((Integer) CB_Cliente.getSelectedItem());
-        String temporal= cantidadtemporal.toString();
-        factura.setCantidad_producto(Integer.parseInt(temporal));
+        factura.setProductos(Productos);
+        factura.setId_cliente((Cliente) CB_Cliente.getSelectedItem());
+        factura.setCantidad_producto(cantidadtemporal);
         factura.setObservacion(JObservacion.getText());
-        factura.setForma_pago((String) CB_Pago.getSelectedItem());
+       factura.setForma_pago((String) CB_Pago.getSelectedItem());
         factura.setTotal(Float.parseFloat(JTotal.getText()));
         
         try {

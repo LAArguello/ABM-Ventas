@@ -14,9 +14,9 @@ import java.util.Date;
 public class Factura {
     private Integer id;
     private Date fecha;
-    private Integer id_cliente;
-    private Producto productos;
-    private Integer cantidad_producto;
+    private Cliente id_cliente;
+    private String productos;
+    private Float cantidad_producto;
     private String forma_pago;
     private String observacion;
     private Float total;
@@ -41,27 +41,27 @@ public class Factura {
         this.fecha = fecha;
     }
 
-    public Integer getId_cliente() {
+    public Cliente getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(Integer id_cliente) {
+    public void setId_cliente(Cliente id_cliente) {
         this.id_cliente = id_cliente;
     }
 
-    public Producto getProductos() {
+    public String getProductos() {
         return productos;
     }
 
-    public void setProductos(Producto productos) {
+    public void setProductos(String productos) {
         this.productos = productos;
     }
 
-    public Integer getCantidad_producto() {
+    public Float getCantidad_producto() {
         return cantidad_producto;
     }
 
-    public void setCantidad_producto(Integer cantidad_producto) {
+    public void setCantidad_producto(Float cantidad_producto) {
         this.cantidad_producto = cantidad_producto;
     }
 

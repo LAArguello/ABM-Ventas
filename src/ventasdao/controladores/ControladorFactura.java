@@ -46,9 +46,9 @@ public class ControladorFactura implements ICrud<Factura> {
         try {
             ps = connection.prepareStatement(sql);
             ps.setDate(1, fecha);
-            ps.setInt(2, entidad.getId_cliente());
-            ps.setInt(3,entidad.getProductos().getId());
-            ps.setInt(4, entidad.getCantidad_producto());
+            ps.setInt(2, entidad.getId_cliente().getId());
+            ps.setString(3,entidad.getProductos());
+            ps.setFloat(4, entidad.getCantidad_producto());
             ps.setString(5, entidad.getForma_pago());
             ps.setString(6, entidad.getObservacion());
             ps.setFloat(7, entidad.getTotal());
@@ -106,9 +106,9 @@ public class ControladorFactura implements ICrud<Factura> {
               
                 factura.setId(rs.getInt("id"));
                 factura.setFecha(rs.getDate("fecha"));
-                factura.setId_cliente(rs.getInt("cliente"));
-                factura.setProductos(getproducto(rs.getInt("productos")));
-                factura.setCantidad_producto(rs.getInt("cantidad"));
+                factura.setId_cliente(getcliente(rs.getInt("cliente")));
+                factura.setProductos(rs.getString("productos"));
+                factura.setCantidad_producto(rs.getFloat("cantidad"));
                 factura.setForma_pago(rs.getString("forma_pago"));
                 factura.setObservacion(rs.getString("observacion"));
                 factura.setTotal(rs.getFloat("total"));
@@ -123,9 +123,9 @@ public class ControladorFactura implements ICrud<Factura> {
     }
     
     
-       private Producto getproducto(Integer id) throws Exception{
-     this.controladorProducto = new ControladorProducto();
-     Producto producto = controladorProducto.extraer(id);
-     return producto;
+       private Cliente getcliente(Integer id) throws Exception{
+     this.controladorCliente = new ClienteControlador();
+     Cliente cliente= controladorCliente.extraer(id);
+     return cliente;
  }   
 }

@@ -10,12 +10,12 @@
 
 CREATE TABLE public.factura
 (
-    id integer NOT NULL,
+    id BIGSERIAL NOT NULL,
     fecha date,
     cliente integer,
-    productos character varying(300) COLLATE pg_catalog."default",
+    productos character varying(3000000) COLLATE pg_catalog."default",
     cantidad integer,
-    "forma de pago" character varying(300) COLLATE pg_catalog."default",
+    forma_pago character varying(300) COLLATE pg_catalog."default",
     observacion character varying(300) COLLATE pg_catalog."default",
     total double precision,
     CONSTRAINT factura_pkey PRIMARY KEY (id),
