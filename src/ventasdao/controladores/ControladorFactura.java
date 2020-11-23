@@ -34,7 +34,6 @@ public class ControladorFactura implements ICrud<Factura> {
     
     private String sql;
     
-    private ControladorProducto controladorProducto;
     
     private ClienteControlador controladorCliente;
 
@@ -85,8 +84,30 @@ public class ControladorFactura implements ICrud<Factura> {
     }
 
     @Override
-    public boolean modificar(Factura entidad) throws SQLException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean modificar(Factura entidad) throws SQLException, ClassNotFoundException, Exception  {
+   connection = Conexion.obtenerConexion();
+        this.sql= "UPDATE factura SET fecha=?, cliente=?, productos=?, cantidad=?, forma_pago=?, observacion=?, total=? WHERE id=?";
+              
+        try {
+                       Date fecha= new Date (entidad.getFecha().getTime());
+
+            ps = connection.prepareStatement(sql);
+            ps.setDate(1, fecha);
+            ps.setInt(2, entidad.getId_cliente().getId());
+            ps.setString(3,entidad.getProductos());
+            ps.setFloat(4, entidad.getCantidad_producto());
+            ps.setString(5, entidad.getForma_pago());
+            ps.setString(6, entidad.getObservacion());
+            ps.setFloat(7, entidad.getTotal());
+            ps.setInt(8, entidad.getId());
+           
+
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorFactura.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return false;
     }
 
     @Override

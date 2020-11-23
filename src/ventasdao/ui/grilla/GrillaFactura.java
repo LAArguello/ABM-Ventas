@@ -57,7 +57,7 @@ public class GrillaFactura extends AbstractTableModel{
         switch(column){
              case 0: return "ID";
               case 1: return "Fecha";
-              case 2: return "ID_Cliente";
+              case 2: return "Cliente";
               case 3: return "Productos";
               case 4: return "Cantidad";
               case 5: return "Forma_Pago";
@@ -68,7 +68,7 @@ public class GrillaFactura extends AbstractTableModel{
         
         } //To change body of generated methods, choose Tools | Templates.
     }
-    public Factura getProductoFromRow(int rowIndex){
+    public Factura getFacturaFromRow(int rowIndex){
         return facturas.get(rowIndex);
     }
 
