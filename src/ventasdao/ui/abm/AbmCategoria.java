@@ -224,7 +224,18 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
                jtfDescripcion.setText(categoria.getDescripcion());
                jtfid.setText(categoria.getId().toString() );
                
-               
+                ArrayList<Categoria> categorias = new ArrayList<>();
+
+        try {
+            
+            categorias = categoriaControlador.listar();
+        } catch (Exception e) {
+            e.printStackTrace ();
+        }
+
+         grillaCategoria = new GrillaCategoria(categorias);
+        jtListadoCategorias.setModel(grillaCategoria);
+        
                
     }//GEN-LAST:event_jtListadoCategoriasMouseClicked
 
@@ -251,14 +262,19 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            jtListadoCategorias.setModel(new GrillaCategoria(categoriaControlador.listar()));
+        ArrayList<Categoria> categorias = new ArrayList<>();
 
-        } catch (Exception ex) {
-            Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            
+            categorias = categoriaControlador.listar();
+        } catch (Exception e) {
+            e.printStackTrace ();
         }
+
+         grillaCategoria = new GrillaCategoria(categorias);
+        jtListadoCategorias.setModel(grillaCategoria);
         
-        
+            
         
             }
         }
@@ -279,7 +295,16 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
 
         } catch (Exception ex) {
             Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);    }//GEN-LAST:event_jbAltaCategoria2MouseClicked
+       ArrayList<Categoria> categorias = new ArrayList<>();
 
+        try {
+            categorias = categoriaControlador.listar();
+        } catch (Exception e) {
+            e.printStackTrace ();
+        }
+
+         grillaCategoria = new GrillaCategoria(categorias);
+        jtListadoCategorias.setModel(grillaCategoria);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

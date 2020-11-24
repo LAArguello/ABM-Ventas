@@ -48,12 +48,17 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         controladorFactura= new ControladorFactura();
         clienteControlador= new ClienteControlador();
         productoControlador= new ControladorProducto();
-             try {
-            grillafactura= new GrillaFactura(controladorFactura.listar());
-            tablefacturas.setModel(grillafactura);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+         ArrayList<Factura> facturas = new ArrayList<>();
+
+        try {
+            facturas = controladorFactura.listar();
+        } catch (Exception e) {
+            e.printStackTrace ();
         }
+        grillafactura= new GrillaFactura(facturas);
+            tablefacturas.setModel(grillafactura);
+
+       
             
         try {
             ArrayList<Cliente> clientes = clienteControlador.listar();
@@ -366,16 +371,20 @@ public class AbmFactura extends javax.swing.JInternalFrame {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+         ArrayList<Factura> facturas = new ArrayList<>();
+
         try {
-            grillafactura= new GrillaFactura(controladorFactura.listar());
+            facturas = controladorFactura.listar();
+        } catch (Exception e) {
+            e.printStackTrace ();
+        }
+        grillafactura= new GrillaFactura(facturas);
             tablefacturas.setModel(grillafactura);
-        } catch (Exception ex) {
-            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
         }
-        }
-        // TODO add your handling code here:
+    
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -413,13 +422,18 @@ int lenght= JObservacion.getText().length();
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        ArrayList<Factura> facturas = new ArrayList<>();
+
         try {
-            grillafactura= new GrillaFactura(controladorFactura.listar());
+            facturas = controladorFactura.listar();
+        } catch (Exception e) {
+            e.printStackTrace ();
+        }
+        grillafactura= new GrillaFactura(facturas);
             tablefacturas.setModel(grillafactura);
-        } catch (Exception ex) {
-            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+        
         }
-        }
+        
         }
         }
         // TODO add your handling code here:
@@ -437,12 +451,19 @@ int lenght= JObservacion.getText().length();
         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
+         ArrayList<Factura> facturas = new ArrayList<>();
+
         try {
-            grillafactura= new GrillaFactura(controladorFactura.listar());
-            tablefacturas.setModel(grillafactura);
-        } catch (Exception ex) {
-            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+            facturas = controladorFactura.listar();
+        } catch (Exception e) {
+            e.printStackTrace ();
         }
+        grillafactura= new GrillaFactura(facturas);
+            tablefacturas.setModel(grillafactura);
+        
+
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tablefacturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablefacturasMouseClicked
@@ -462,12 +483,16 @@ int lenght= JObservacion.getText().length();
         JTotal.setText(null);
         
         
-        /*Categoria categoria = grillaCategoria.getCategoriaFromRow(jtListadoCategorias.getSelectedRow());
+        ArrayList<Factura> facturas = new ArrayList<>();
+
+        try {
+            facturas = controladorFactura.listar();
+        } catch (Exception e) {
+            e.printStackTrace ();
+        }
+        grillafactura= new GrillaFactura(facturas);
+            tablefacturas.setModel(grillafactura);
         
-               jtfDenominacion.setText(categoria.getDenominacion());
-               jtfDescripcion.setText(categoria.getDescripcion());
-               jtfid.setText(categoria.getId().toString() );*/
-        // TODO add your handling code here:
     }//GEN-LAST:event_tablefacturasMouseClicked
 
 

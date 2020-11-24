@@ -55,7 +55,12 @@ public class Abmcliente extends javax.swing.JInternalFrame {
          }
         
     }
-    
+     private void limpiarCampos() {
+       jtextid.setText(" ");
+       Jtextnombre.setText(" ");
+       Jtextapellido.setText(" ");
+       Jtextdocumento.setText(" ");
+    }
     
 
     public static void infoBox(String infoMessage, String titleBar)
@@ -70,6 +75,7 @@ public class Abmcliente extends javax.swing.JInternalFrame {
     return false;  
   }  
 }
+     
      
      
     
@@ -288,15 +294,19 @@ public class Abmcliente extends javax.swing.JInternalFrame {
                    } else{
         try {
             clienteControlador.modificar(cliente);
+            limpiarCampos();
         } catch (Exception ex) {
              Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
          }
 
-         try {
-             jtListadoCliente.setModel(new GrillaCliente(clienteControlador.listar()));
-         } catch (Exception ex) {
-             Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
-         }
+         ArrayList<Cliente> clientes;
+        try {
+            clientes = clienteControlador.listar();
+            grillaCliente = new GrillaCliente(clientes);
+        } catch (Exception e) {
+            e.printStackTrace ();
+        } 
+        jtListadoCliente.setModel(grillaCliente);
                }
             }
         }
@@ -316,7 +326,14 @@ public class Abmcliente extends javax.swing.JInternalFrame {
                } else if(cliente.getTipocliente().getId()==2){
         listtipocliente.select(1);
     }
-               
+                ArrayList<Cliente> clientes;
+        try {
+            clientes = clienteControlador.listar();
+            grillaCliente = new GrillaCliente(clientes);
+        } catch (Exception e) {
+            e.printStackTrace ();
+        } 
+        jtListadoCliente.setModel(grillaCliente);
                
     }//GEN-LAST:event_jtListadoClienteMouseClicked
 
@@ -363,6 +380,7 @@ public class Abmcliente extends javax.swing.JInternalFrame {
                    } else {
                     try {
             clienteControlador.crear(cliente);
+            limpiarCampos();
         } catch (Exception ex) {
              Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -394,15 +412,19 @@ public class Abmcliente extends javax.swing.JInternalFrame {
            
        try {
             clienteControlador.eliminar(cliente);
+            limpiarCampos();
         } catch (Exception ex) {
              Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
          }
 
-         try {
-             jtListadoCliente.setModel(new GrillaCliente(clienteControlador.listar()));
-         } catch (Exception ex) {
-             Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
-         }
+         ArrayList<Cliente> clientes;
+        try {
+            clientes = clienteControlador.listar();
+            grillaCliente = new GrillaCliente(clientes);
+        } catch (Exception e) {
+            e.printStackTrace ();
+        } 
+        jtListadoCliente.setModel(grillaCliente);
                
             
     }//GEN-LAST:event_jButton3ActionPerformed

@@ -35,23 +35,23 @@ private ControladorProducto productoControlador;
         initComponents();
         productoControlador=new ControladorProducto();
         categoriaControlador= new CategoriaControlador();
-             try {
-            grillaProducto = new GrillaProducto(productoControlador.listar());
-            jtListadoProducto.setModel(grillaProducto);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
-        }
+             ArrayList<Producto> productos;
+        try {
+            productos = productoControlador.listar();
+            grillaProducto = new GrillaProducto(productos);
+        } catch (Exception e) {
+            e.printStackTrace ();
+        } 
+        jtListadoProducto.setModel(grillaProducto);
         try {
             ArrayList<Categoria> categorias = categoriaControlador.listar();
                     modelcombo= new DefaultComboBoxModel(categorias.toArray());
                     CBCategoria.setModel(modelcombo);
-                    
-
+            
         } catch (Exception ex) {
             Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-    
+  
     }
    
      public static void infoBox(String infoMessage, String titleBar)
@@ -268,14 +268,16 @@ private ControladorProducto productoControlador;
             Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    try {
-            grillaProducto = new GrillaProducto(productoControlador.listar());
-            jtListadoProducto.setModel(grillaProducto);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-        Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    ArrayList<Producto> productos;
+        try {
+            productos = productoControlador.listar();
+            grillaProducto = new GrillaProducto(productos);
+        } catch (Exception e) {
+            e.printStackTrace ();
+        } 
+        jtListadoProducto.setModel(grillaProducto);
+    
+     
         
     }//GEN-LAST:event_B_registrarActionPerformed
             }
@@ -292,13 +294,18 @@ private ControladorProducto productoControlador;
 
        try {
             productoControlador.eliminar(producto);
+            limpiarCampos();
         } catch (Exception ex) {
             Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
         }
+         ArrayList<Producto> productos;
         try {
-            jtListadoProducto.setModel(new GrillaProducto(productoControlador.listar()));
-        } catch (Exception ex) {
-            Logger.getLogger(AbmCategoria.class.getName()).log(Level.SEVERE, null, ex);    }   
+            productos = productoControlador.listar();
+            grillaProducto = new GrillaProducto(productos);
+        } catch (Exception e) {
+            e.printStackTrace ();
+        } 
+        jtListadoProducto.setModel(grillaProducto);
     }//GEN-LAST:event_B_EliminarActionPerformed
              
     private void B_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_EditarActionPerformed
@@ -342,19 +349,22 @@ int lenght= jnombre.getText().length();
         Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
     }
         
-    try {
-        jtListadoProducto.setModel(new GrillaProducto(productoControlador.listar()));
-    } catch (SQLException ex) {
-        Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (Exception ex) {
-        Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
+     ArrayList<Producto> productos;
+        try {
+            productos = productoControlador.listar();
+            grillaProducto = new GrillaProducto(productos);
+        } catch (Exception e) {
+            e.printStackTrace ();
+        } 
+        jtListadoProducto.setModel(grillaProducto);
     }
-                }
         }
             }
-         }
+         
+                }
+        
+            
+         
     }//GEN-LAST:event_B_EditarActionPerformed
 
     private void jtListadoProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoProductoMouseClicked
@@ -365,6 +375,14 @@ int lenght= jnombre.getText().length();
               Jfecha_creacion.setDate(producto.getFecha_alta());
               CBCategoria.setSelectedItem(null);
               Jid.setText(producto.getId().toString());
+               ArrayList<Producto> productos;
+        try {
+            productos = productoControlador.listar();
+            grillaProducto = new GrillaProducto(productos);
+        } catch (Exception e) {
+            e.printStackTrace ();
+        } 
+        jtListadoProducto.setModel(grillaProducto);
         // TODO add your handling code here:
     }//GEN-LAST:event_jtListadoProductoMouseClicked
 
@@ -396,6 +414,8 @@ int lenght= jnombre.getText().length();
        jnombre.setText("");
        jprecio.setText("");
        CBCategoria.setSelectedItem(null);
+       Jid.setText(" ");
+       
 
     }
 }
