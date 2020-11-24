@@ -116,7 +116,6 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lTotal6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="JTotal" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -292,6 +291,7 @@
     <Component class="javax.swing.JTextField" name="Jidfactura">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
   </SubComponents>

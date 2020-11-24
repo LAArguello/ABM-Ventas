@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import ventasdao.controladores.ClienteControlador;
 import ventasdao.objetos.Categoria;
 import ventasdao.objetos.Cliente;
@@ -54,7 +55,23 @@ public class Abmcliente extends javax.swing.JInternalFrame {
          }
         
     }
-        
+    
+    
+
+    public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+      public static boolean isNumeric(String str) { 
+  try {  
+    Double.parseDouble(str);  
+    return true;
+  } catch(NumberFormatException e){  
+    return false;  
+  }  
+}
+     
+     
     
    
     /**
@@ -116,6 +133,10 @@ public class Abmcliente extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jtextid.setEditable(false);
+        jtextid.setBackground(new java.awt.Color(0, 0, 0));
+        jtextid.setEnabled(false);
 
         jButton2.setText("Ingresar");
         jButton2.setToolTipText("");
@@ -179,24 +200,28 @@ public class Abmcliente extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(26, 26, 26)
                         .addComponent(jtextid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(Jtextnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(Jtextnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Jtextapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(nombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Jtextdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Jtextapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Jtextdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(listtipocliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(16, 16, 16)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nombre3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(listtipocliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3)
@@ -238,8 +263,30 @@ public class Abmcliente extends javax.swing.JInternalFrame {
         }
         cliente.setTipocliente(tipcli); 
         cliente.setId(Integer.parseInt(jtextid.getText()));
+        
+        int lenght=Jtextnombre.getText().length();
+        int lenght2=Jtextapellido.getText().length();
+        int lenght3=Jtextdocumento.getText().length();
+        if (lenght < 3){
+       Abmcliente.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+
+        } else {
+            if(lenght2 < 3){
+           Abmcliente.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+            } else {
+               if (lenght3 < 3) {
+                   
+    AbmCategoria.infoBox("Los caracteres ingresados son insuficientes, ingrese el documento entero", "ERROR");
+
+               } else {  
+                   Boolean prueba= Abmcliente.isNumeric(Jtextdocumento.getText());
+                  
+                   if(prueba == false){
+                   
+            Abmcliente.infoBox("Ingrese numeros para el DNI", "ERROR");
              
-       try {
+                   } else{
+        try {
             clienteControlador.modificar(cliente);
         } catch (Exception ex) {
              Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -250,7 +297,10 @@ public class Abmcliente extends javax.swing.JInternalFrame {
          } catch (Exception ex) {
              Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
          }
-                                      
+               }
+            }
+        }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtListadoClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoClienteMouseClicked
@@ -290,8 +340,28 @@ public class Abmcliente extends javax.swing.JInternalFrame {
             tipcli.setDescripcion("aquel contribuyente que tiene la obligaciÃ³n de presentar y pagar IVA");
         }
         cliente.setTipocliente(tipcli); 
-        
-       try {
+        int lenght=Jtextnombre.getText().length();
+        int lenght2=Jtextapellido.getText().length();
+        int lenght3=Jtextdocumento.getText().length();
+        if (lenght < 3){
+       Abmcliente.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+
+        } else {
+            if(lenght2 < 3){
+           Abmcliente.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+            } else {
+               if (lenght3 < 3) {
+    AbmCategoria.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+
+               } else {
+                   Boolean prueba= Abmcliente.isNumeric(Jtextdocumento.getText());
+                  
+                   if(prueba == false){
+                   
+            Abmcliente.infoBox("Ingrese numeros para el DNI", "ERROR");
+             
+                   } else {
+                    try {
             clienteControlador.crear(cliente);
         } catch (Exception ex) {
              Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -306,12 +376,22 @@ public class Abmcliente extends javax.swing.JInternalFrame {
         } 
         jtListadoCliente.setModel(grillaCliente);
         
+                   
+               }
+            }
+        }
+        
+        
+        }
+        
+        
+      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         cliente= new Cliente();
         cliente.setId(Integer.parseInt(jtextid.getText()));
-             
+           
        try {
             clienteControlador.eliminar(cliente);
         } catch (Exception ex) {
@@ -323,6 +403,8 @@ public class Abmcliente extends javax.swing.JInternalFrame {
          } catch (Exception ex) {
              Logger.getLogger(Abmcliente.class.getName()).log(Level.SEVERE, null, ex);
          }
+               
+            
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

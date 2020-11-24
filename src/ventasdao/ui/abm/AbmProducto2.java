@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import ventasdao.controladores.CategoriaControlador;
 import ventasdao.controladores.ControladorProducto;
 import ventasdao.objetos.Categoria;
@@ -52,6 +53,20 @@ private ControladorProducto productoControlador;
     
     
     }
+   
+     public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+     public static boolean isNumeric(String str) { 
+  try {  
+    Float.parseFloat(str);  
+    return true;
+  } catch(NumberFormatException e){  
+    return false;  
+  }  
+}
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,6 +80,7 @@ private ControladorProducto productoControlador;
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         B_registrar = new javax.swing.JButton();
+        Jfecha_creacion = new com.toedter.calendar.JDateChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -77,7 +93,6 @@ private ControladorProducto productoControlador;
         B_Editar = new javax.swing.JButton();
         Jid = new javax.swing.JTextField();
         CBCategoria = new javax.swing.JComboBox<>();
-        Jfecha_creacion = new com.toedter.calendar.JDateChooser();
 
         jLabel4.setText("Precio");
 
@@ -145,12 +160,6 @@ private ControladorProducto productoControlador;
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(B_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(B_registrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(B_Editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -162,13 +171,19 @@ private ControladorProducto productoControlador;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Jfecha_creacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Jid, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(CBCategoria, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jdescripcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
-                            .addComponent(Jfecha_creacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                                .addComponent(jdescripcion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(B_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(B_registrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(B_Editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -183,22 +198,23 @@ private ControladorProducto productoControlador;
                             .addComponent(jLabel1)
                             .addComponent(jnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(CBCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(Jfecha_creacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(CBCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(Jfecha_creacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5))
+                        .addGap(26, 26, 26)
                         .addComponent(B_registrar)
                         .addGap(26, 26, 26)
                         .addComponent(B_Editar)
@@ -215,6 +231,27 @@ private ControladorProducto productoControlador;
 
     private void B_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_registrarActionPerformed
         // TODO add your handling code here:
+        int lenght= jnombre.getText().length();
+        int lenght2= jdescripcion.getText().length();
+        
+         if (lenght < 3){
+       AbmProducto2.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+
+        } else {
+            if(lenght2 < 3){
+           AbmProducto2.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+            }
+            else {
+                  Boolean prueba2= AbmFactura.isNumeric(jprecio.getText());
+        
+        if (prueba2 == false){
+        AbmProducto2.infoBox("ingrese cantidades numericas!", "ERROR");
+       
+               } else {
+
+                if(Float.parseFloat(jprecio.getText())<= 0 ){
+      AbmProducto2.infoBox("Por favor ingrese numeros mayores a 0!", "ERROR");
+                } else {
               Producto producto= new Producto();
         producto.setNombre(jnombre.getText());
         producto.setDescripcion(jdescripcion.getText());
@@ -222,7 +259,8 @@ private ControladorProducto productoControlador;
         producto.setFecha_alta(Jfecha_creacion.getDate());
         producto.setPrecio(Float.parseFloat(jprecio.getText()));
         producto.setCategoria((Categoria)CBCategoria.getSelectedItem());
-
+        
+                    
         try {
             productoControlador.crear(producto);
              limpiarCampos();
@@ -240,6 +278,12 @@ private ControladorProducto productoControlador;
     }
         
     }//GEN-LAST:event_B_registrarActionPerformed
+            }
+         }
+    
+   }
+    }
+    
 
     private void B_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_EliminarActionPerformed
         // TODO add your handling code here:
@@ -258,7 +302,28 @@ private ControladorProducto productoControlador;
     }//GEN-LAST:event_B_EliminarActionPerformed
              
     private void B_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_EditarActionPerformed
-         Producto producto= new Producto();
+int lenght= jnombre.getText().length();
+        int lenght2= jdescripcion.getText().length();
+        
+         if (lenght < 3){
+       AbmProducto2.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+
+        } else {
+            if(lenght2 < 3){
+           AbmProducto2.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+            }
+            else {
+                  Boolean prueba2= AbmFactura.isNumeric(jprecio.getText());
+        
+        if (prueba2 == false){
+        AbmProducto2.infoBox("ingrese cantidades numericas!", "ERROR");
+       
+               } else {
+
+                if(Float.parseFloat(jprecio.getText())<= 0 ){
+      AbmProducto2.infoBox("Por favor ingrese numeros mayores a 0!", "ERROR");
+                } else {
+        Producto producto= new Producto();
          producto.setNombre(jnombre.getText());
          producto.setDescripcion(jdescripcion.getText());
          producto.setPrecio(Float.parseFloat(jprecio.getText()));
@@ -286,6 +351,10 @@ private ControladorProducto productoControlador;
     } catch (Exception ex) {
         Logger.getLogger(AbmProducto2.class.getName()).log(Level.SEVERE, null, ex);
     }
+                }
+        }
+            }
+         }
     }//GEN-LAST:event_B_EditarActionPerformed
 
     private void jtListadoProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoProductoMouseClicked

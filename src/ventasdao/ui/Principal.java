@@ -55,7 +55,7 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 442, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
+        jMenu1.setText("Opciones ABM");
 
         jmiCategoria.setText("Categoria");
         jmiCategoria.addActionListener(new java.awt.event.ActionListener() {

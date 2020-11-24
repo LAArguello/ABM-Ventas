@@ -5,7 +5,9 @@
  */
 package ventasdao.ui.abm;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,7 +50,11 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
     jtfDescripcion.setText("");
     jtfid.setText("");
     }
-
+    
+ public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -179,9 +185,17 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         
         categoria.setDenominacion(jtfDenominacion.getText());
         categoria.setDescripcion(jtfDescripcion.getText());
-        
-        
-        try {
+        int lenght=jtfDenominacion.getText().length();
+        int lenght2= jtfDescripcion.getText().length();
+
+        if (lenght < 3){
+        AbmCategoria.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+        } else {
+            if(lenght2 <3){
+          AbmCategoria.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+
+            } else {
+                try {
             categoriaControlador.crear(categoria);
             limpiarCampos();
         } catch (Exception ex) {
@@ -198,6 +212,8 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
          grillaCategoria = new GrillaCategoria(categorias);
         jtListadoCategorias.setModel(grillaCategoria);
         
+            }
+        }
     }//GEN-LAST:event_jbAltaCategoriaMouseClicked
 
     private void jtListadoCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoCategoriasMouseClicked
@@ -219,7 +235,16 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         categoria.setDenominacion(jtfDenominacion.getText());
         categoria.setDescripcion(jtfDescripcion.getText());
         categoria.setId(Integer.parseInt(jtfid.getText()));
-        
+        int lenght=jtfDenominacion.getText().length();
+        int lenght2= jtfDescripcion.getText().length();
+
+        if (lenght < 3){
+        AbmCategoria.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+        } else {
+            if(lenght2 <3){
+          AbmCategoria.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+
+            } else {
         try {
             categoriaControlador.modificar(categoria);
             limpiarCampos();
@@ -235,7 +260,8 @@ public class AbmCategoria extends javax.swing.JInternalFrame {
         
         
         
-
+            }
+        }
     }//GEN-LAST:event_jbAltaCategoria1MouseClicked
 
     private void jbAltaCategoria2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbAltaCategoria2MouseClicked

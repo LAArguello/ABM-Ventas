@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import ventasdao.controladores.ClienteControlador;
 import ventasdao.controladores.ControladorFactura;
 import ventasdao.controladores.ControladorProducto;
@@ -70,7 +71,31 @@ public class AbmFactura extends javax.swing.JInternalFrame {
          } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
+    private void limpiarCampos() {
+     DateFactura.setDate(null);
+     CB_Cliente.setSelectedItem(null);
+     CB_Producto.setSelectedItem(null);
+     JCantidad.setText(null);
+     JObservacion.setText(null);
+     CB_Pago.setSelectedItem(null);
+     JTotal.setText(null);
+     Jidfactura.setText(null);
+
+    }
+       public static void infoBox(String infoMessage, String titleBar)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+      public static boolean isNumeric(String str) { 
+  try {  
+    Float.parseFloat(str);  
+    return true;
+  } catch(NumberFormatException e){  
+    return false;  
+  }  
+}
             /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -174,6 +199,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         });
 
         Jidfactura.setEditable(false);
+        Jidfactura.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -257,7 +283,6 @@ public class AbmFactura extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lTotal7)
                                     .addComponent(CB_Pago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lTotal6)
                             .addComponent(JTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -286,17 +311,43 @@ public class AbmFactura extends javax.swing.JInternalFrame {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
        Productos= Productos + ", " + productoobtenido.getNombre();
+        Boolean prueba1= AbmFactura.isNumeric(JCantidad.getText());
+        if (prueba1 == false){
+        AbmFactura.infoBox("ingrese cantidades numericas!", "ERROR");
+       
+        } else {
+            if (Float.parseFloat(JCantidad.getText()) <= 0){
+                AbmFactura.infoBox("ingrese cantidades mayores a 0!", "ERROR");
+        
+            } else {
+
         Float cantidadproducto= Float.parseFloat(JCantidad.getText());
+
         float precioproducto= Float.parseFloat(JCantidad.getText()) * productoobtenido.getPrecio();
                 preciotemporal= preciotemporal + precioproducto;
                 cantidadtemporal= cantidadtemporal + cantidadproducto;
                        JTotal.setText(preciotemporal.toString());
-
+        }
+        }
     }//GEN-LAST:event_B_ProductoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
+        int lenght= JObservacion.getText().length();
         
+        if(lenght < 3){
+       AbmFactura.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+   
+        }else{
+            Boolean prueba2= AbmFactura.isNumeric(JTotal.getText());
+        
+        if (prueba2 == false){
+        AbmFactura.infoBox("ingrese cantidades numericas!", "ERROR");
+       
+        } else {
+            if (Float.parseFloat(JTotal.getText())<= 0){
+     AbmFactura.infoBox("ingrese cantidades mayores a 0!", "ERROR");
+            } else{
         Factura factura = new Factura();
         factura.setFecha(DateFactura.getDate());
         factura.setProductos(Productos);
@@ -306,9 +357,10 @@ public class AbmFactura extends javax.swing.JInternalFrame {
        factura.setForma_pago((String) CB_Pago.getSelectedItem());
         factura.setTotal(Float.parseFloat(JTotal.getText()));
         
+       
         try {
             controladorFactura.crear(factura);
-             //limpiarCampos();
+             limpiarCampos();
         
         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
@@ -320,11 +372,28 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        }
+        }
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+int lenght= JObservacion.getText().length();
+        
+        if(lenght < 3){
+       AbmFactura.infoBox("Los caracteres ingresados son insuficientes, ingrese al menos tres", "ERROR");
+   
+        }else{
+            Boolean prueba2= AbmFactura.isNumeric(JTotal.getText());
+        
+        if (prueba2 == false){
+        AbmFactura.infoBox("ingrese cantidades numericas!", "ERROR");
+       
+        } else {
+            if (Float.parseFloat(JTotal.getText())<= 0){
+     AbmFactura.infoBox("ingrese cantidades mayores a 0!", "ERROR");
+            } else {
         Factura factura = new Factura();
         factura.setFecha(DateFactura.getDate());
         factura.setProductos(Productos);
@@ -338,7 +407,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         
         try {
             controladorFactura.modificar(factura);
-             //limpiarCampos();
+            limpiarCampos();
         
         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
@@ -350,7 +419,9 @@ public class AbmFactura extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        }
+        }
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -360,6 +431,8 @@ public class AbmFactura extends javax.swing.JInternalFrame {
        
         try {
             controladorFactura.eliminar(factura);
+             limpiarCampos();
+
 // TODO add your handling code here:
         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
