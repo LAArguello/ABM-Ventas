@@ -51,6 +51,7 @@ public class AbmFactura extends javax.swing.JInternalFrame {
             Float preciotemporal= 0f;
             Float cantidadtemporal=0f;
             Float precioproductoglobal=0f;
+            Float totalf=0f;
             String Productos="";
 
 
@@ -743,10 +744,11 @@ int lenght= JObservacion.getText().length();
         int a =lineasfactura.size();
         for (int i=0;i<a;i++){
             Lineafactura sumandolineas= new Lineafactura();
-          
             sumandolineas=lineasfactura.get(i);
-             sumando= sumando + sumandolineas.getSubtotal();
+                sumando= sumando + sumandolineas.getSubtotal();
+        
         }
+                   
         factura.setTotal(sumando);
         try {
             controladorFactura.modificarlinea(factura);
@@ -773,34 +775,37 @@ int lenght= JObservacion.getText().length();
         }
         grillafactura= new GrillaFactura(facturas);
             tabladefacturas.setModel(grillafactura);
-        // editar comienza aqui uwu
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       Factura factura= new Factura();
+       
+       Lineafactura lifac= new Lineafactura();
+       lifac.setId(Integer.parseInt(jidlinea.getText()));
+       lifac.setSubtotal(Float.parseFloat(subtotal.getText()));
+        Factura factura= new Factura();
         factura.setId(Integer.parseInt(jidfactura.getText()));
-        ArrayList<Lineafactura> lineasfactura= new ArrayList<>();
         try {
-           lineasfactura= controladorlineafactura.listar();
+            Factura total= new Factura();
+            total=controladorFactura.SelectTotal(Integer.parseInt(jidfactura.getText()));
+            totalf=total.getTotal();
         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Float restando=0f;
-        Integer a=lineasfactura.size();
-        for (int i=0;i<a;i++){
-            Lineafactura sumandolineas= lineasfactura.get(i);
-            if(sumandolineas.getFactura().getId()==factura.getId()){
-             restando= sumando + sumandolineas.getSubtotal();
-        } else{
-                sumando=sumando;
-            }
-          
+        
+        Float restando=totalf;
+        
+       restando= restando - lifac.getSubtotal();
+        factura.setTotal(restando);
+         try {
+            controladorFactura.modificarlinea(factura);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        factura.setTotal(sumando);
-        Lineafactura lifac= new Lineafactura();
-       lifac.setId(Integer.parseInt(jidlinea.getText()));
+        
        try {
            controladorlineafactura.eliminar(lifac);
            limpiarcamposproducto();
@@ -808,15 +813,25 @@ int lenght= JObservacion.getText().length();
         } catch (Exception ex) {
             Logger.getLogger(AbmFactura.class.getName()).log(Level.SEVERE, null, ex);
         }
-       ArrayList<Lineafactura> lineafactura= new ArrayList<>();
+       
+        ArrayList<Lineafactura> linefactura= new ArrayList<>();
 
         try {
-             lineafactura = controladorlineafactura.listar();
+             linefactura = controladorlineafactura.listar();
         } catch (Exception e) {
             e.printStackTrace ();
         }
-        grillalinea= new GrillaLineaFactura(lineafactura);
-            tablefacturas.setModel(grillalinea);
+        grillalinea= new GrillaLineaFactura(linefactura);
+            tablefacturas.setModel(grillalinea);   
+             ArrayList<Factura> facturas = new ArrayList<>();
+
+        try {
+            facturas = controladorFactura.listar();
+        } catch (Exception e) {
+            e.printStackTrace ();
+        }
+        grillafactura= new GrillaFactura(facturas);
+            tabladefacturas.setModel(grillafactura);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void tabladefacturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabladefacturasMouseClicked

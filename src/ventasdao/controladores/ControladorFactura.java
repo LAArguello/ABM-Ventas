@@ -194,7 +194,24 @@ connection = Conexion.obtenerConexion();
             return factura;
     
     }
+      public Factura SelectTotal(int id) throws SQLException, Exception  {
+   connection = Conexion.obtenerConexion();
+        this.sql= "SELECT total FROM factura WHERE id = ?";
+              
+            ps = connection.prepareStatement(sql);
+            
+            ps.setInt(1, id);
+            this.rs   = ps.executeQuery();
+            
+            connection.close();
+            
+            this.rs.next();
+            Factura factura= new Factura();
+            factura.setId(id);
+            factura.setTotal(rs.getFloat("total"));
+            return factura;
     
+    }
     
        private Cliente getcliente(Integer id) throws Exception{
      this.controladorCliente = new ClienteControlador();
