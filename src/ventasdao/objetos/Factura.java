@@ -6,6 +6,7 @@
 package ventasdao.objetos;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -15,9 +16,10 @@ public class Factura {
     private Integer id;
     private Date fecha;
     private Cliente id_cliente;
-    private String productos;
-    private Float cantidad_producto;
     private String forma_pago;
+
+   
+    
     private String observacion;
     private Float total;
 
@@ -49,21 +51,6 @@ public class Factura {
         this.id_cliente = id_cliente;
     }
 
-    public String getProductos() {
-        return productos;
-    }
-
-    public void setProductos(String productos) {
-        this.productos = productos;
-    }
-
-    public Float getCantidad_producto() {
-        return cantidad_producto;
-    }
-
-    public void setCantidad_producto(Float cantidad_producto) {
-        this.cantidad_producto = cantidad_producto;
-    }
 
     public String getForma_pago() {
         return forma_pago;

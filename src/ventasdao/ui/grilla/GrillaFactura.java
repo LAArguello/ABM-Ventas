@@ -23,16 +23,15 @@ public class GrillaFactura extends AbstractTableModel{
         this.facturas = datos;
     }
     
-    
 
-    @Override
+   @Override
     public int getRowCount() {
         return facturas.size(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int getColumnCount() {
-         return 8;
+         return 6;
     }
 
     @Override
@@ -41,12 +40,10 @@ public class GrillaFactura extends AbstractTableModel{
         switch(columnIndex){
               case 0: return factura.getId();
               case 1: return factura.getFecha();
-              case 2: return factura.getId_cliente();
-              case 3: return factura.getProductos();
-              case 4: return factura.getCantidad_producto();
-              case 5: return factura.getForma_pago();
-              case 6: return factura.getObservacion();
-              case 7: return factura.getTotal();
+              case 2: return factura.getId_cliente().getNombre();
+              case 3: return factura.getForma_pago();
+              case 4: return factura.getObservacion();
+              case 5: return factura.getTotal();
               default: return "";
           }
         
@@ -58,16 +55,14 @@ public class GrillaFactura extends AbstractTableModel{
              case 0: return "ID";
               case 1: return "Fecha";
               case 2: return "Cliente";
-              case 3: return "Productos";
-              case 4: return "Cantidad";
-              case 5: return "Forma_Pago";
-              case 6: return "Observacion";
-              case 7: return "Total";
+              case 3: return "Forma_Pago";
+              case 4: return "Observacion";
+              case 5: return "Total";
             default: return "";
         
         
-        } //To change body of generated methods, choose Tools | Templates.
-    }
+        }
+        }
     public Factura getFacturaFromRow(int rowIndex){
         return facturas.get(rowIndex);
     }

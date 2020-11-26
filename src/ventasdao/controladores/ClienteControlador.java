@@ -35,6 +35,7 @@ public class ClienteControlador implements ICrud<Cliente>{
     private String sql;
     
     private TipoCliente tipcli;
+    private TipoClienteControlador controladortipocliente;
     
 
     
@@ -101,8 +102,7 @@ public class ClienteControlador implements ICrud<Cliente>{
                 cliente.setNombre(rs.getString("nombre"));
                 cliente.setApellido (rs.getString("apellido"));
                 cliente.setDocumento(rs.getString("documento"));
-                tipcli.setId(rs.getInt("cliente_tipo_id"));
-                cliente.setTipocliente(tipcli);
+                cliente.setTipocliente(gettipocliente(rs.getInt("cliente_tipo_id")));
 
                 
                 
@@ -168,5 +168,10 @@ public class ClienteControlador implements ICrud<Cliente>{
     }
 
     
+     private TipoCliente gettipocliente(Integer id) throws Exception{
+     this.controladortipocliente = new TipoClienteControlador();
+     TipoCliente tipcliente= controladortipocliente.extraer(id);
+     return tipcliente;
+ }   
     
 }

@@ -44,7 +44,7 @@ public class GrillaCliente extends AbstractTableModel{
               case 1: return cliente.getNombre();
               case 2: return cliente.getApellido();
               case 3: return cliente.getDocumento();
-              case 4: return cliente.getTipocliente().getId();
+              case 4: return cliente.getTipocliente().getNombre();
               default: return "";
           }
         
@@ -57,7 +57,7 @@ public class GrillaCliente extends AbstractTableModel{
             case 1: return "NOMBRE";
             case 2: return "APELLIDO";
             case 3: return "DOCUMENTO";
-            case 4: return "IDTipoCli";
+            case 4: return "ID_TipoCliente";
             default: return "";
         
         

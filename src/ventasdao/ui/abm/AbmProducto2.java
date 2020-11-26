@@ -373,7 +373,7 @@ int lenght= jnombre.getText().length();
               jdescripcion.setText(producto.getDescripcion());              
               jprecio.setText(producto.getPrecio().toString());
               Jfecha_creacion.setDate(producto.getFecha_alta());
-              CBCategoria.setSelectedItem(null);
+              CBCategoria.setSelectedItem(producto.getCategoria());
               Jid.setText(producto.getId().toString());
                ArrayList<Producto> productos;
         try {
