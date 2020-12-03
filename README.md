@@ -17,6 +17,9 @@ script01.sql
 ```
 script02.sql
 ```
+```
+script04.sql
+```
 
 ### Configuracion ⌨️
 
@@ -35,7 +38,7 @@ _Este CRUD tiene una estructura formada por tres modulos:_
 _-Principal.java:_ 
 
 
-_En este modulo la unica funcion que tiene es de elegir uno de los otros dos modulos (Abmcliente.java o AbmCategoria.java)._ 
+_En este modulo la unica funcion que tiene es de elegir uno de los otros 4 modulos (Abmcliente.java, AbmCategoria.java, AbmProducto2.java y AbmFactura.java)._ 
 
 _-Abmcliente.java:_ 
 
@@ -58,8 +61,49 @@ _*Descripcion_
 
 _*Denominacion_
 
+_-AbmProducto2.java:_ 
+
+_En este modulo sirve para agregar, editar, o borrar  productos a la base de datos con los siguientes atributos:_  
+
+_*Nombre_ 
+
+_*Descripcion_
+
+_*precio_
+
+_*fecha_alta_
+
+_*Categoria_id_
+
+
+_-AbmFactura.java:_ 
+
+_En este modulo sirve para agregar, editar, o borrar facturas a la base de datos con los siguientes atributos:_  
+
+_*fecha_ 
+
+_*cliente_
+
+_*forma_pago_
+
+_*observacion_
+
+_*total_
+
+_ Este modulo tambien crea Lineafactura que es una tabla en la base de datos que contiene los siguientes atributos:
+
+_*idproducto_ 
+
+_*cantidad_
+
+_*idfactura_
+
+_*subtotal_
+
+
+
 ## Autores ✒️
 _Arguello Leonel Alejandro_ 
 
-_Carmona Luciano Agustin_ 
+
 
