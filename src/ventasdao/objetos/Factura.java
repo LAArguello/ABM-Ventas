@@ -17,9 +17,6 @@ public class Factura {
     private Date fecha;
     private Cliente id_cliente;
     private String forma_pago;
-
-   
-    
     private String observacion;
     private Float total;
 
