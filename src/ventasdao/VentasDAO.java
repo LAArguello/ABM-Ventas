@@ -13,6 +13,10 @@ import ventasdao.objetos.Cliente;
 /**
  *
  * @author Arguello Leonel
+ 
+ 
+ 
+ ESTE ES UN ARCHIVO DE PRUEBA, NO ESTA RELACIONADO AL SISTEMA COMO TAL.
  */
 public class VentasDAO {
 
